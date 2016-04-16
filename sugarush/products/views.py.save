@@ -1,0 +1,54 @@
+from django.shortcuts import render
+from .models import Products,Shops
+from django.http import HttpResponse
+from django.core import serializers
+from django.db.models import Q
+# Create your views here.
+
+def index(request):
+ context = {'shop_list' : Shops.objects.all().order_by('shop_name')}
+ return render(request,'products/frontpage.html',context)
+
+
+def all_products(request):
+ context = {'shop_list' : Shops.objects.all().order_by('shop_name'),'heading': 'Sweets & Snacks','prod_list' : Products.objects.all().order_by('name')}
+ return render(request,'products/all_prod.html',context)
+
+def all_snacks(request):
+ context = {'shop_list' : Shops.objects.all().order_by('shop_name'),'heading': 'Snack Parlour','prod_list' :Products.objects.filter(type = 'SNACK').order_by('name')}
+ return render(request,'products/all_prod.html',context)
+
+def all_sweets(request):
+ context = {'shop_list' : Shops.objects.all().order_by('shop_name'),'heading': 'Sweet Parlour','prod_list' :Products.objects.filter(type = 'SWEET').order_by('name')}
+ return render(request,'products/all_prod.html',context)
+
+def show_shop(request,id=None):
+ context = {'shop_list' : Shops.objects.all().order_by('shop_name'),'company':Shops.objects.filter(id = id),'prod_
+list':Products.objects.filter(shop_id = Shops.objects.get(id = id))}
+ return render(request,'products/shop_prod.html',context)
+
+def searchproduct(request):
+
+ if request.is_ajax():
+  search=request.GET.get('search','')
+  product=Products.objects.filter( Q(name__istartswith=search)).order_by('name')
+  my_list=serializers.serialize("json",product)
+  print(my_list)
+  return HttpResponse(my_list,content_type="application/json") 
+ return HttpResponse("hi")
+
+def oneproduct(request,id=None):
+ context = {'shop_list' : Shops.objects.all().order_by('shop_name'),'heading': 'Product','prod_list' :Products.objects.filter(id=id).order_by('name')}
+ return render(request,'products/all_prod.html',context)
+
+ 
+def sortedProduct(request,id=None):
+ if id == '1':
+  context = {'shop_list' : Shops.objects.all().order_by('shop_name'),'heading': 'Sweets & Snacks','prod_list' : Products.objects.all().order_by('price','name')}
+  return render(request,'products/all_prod.html',context)
+
+ else:
+  context = {'shop_list' : Shops.objects.all().order_by('shop_name'),'heading': 'Sweets & Snacks','prod_list' : Products.objects.all().order_by('-price','name')}
+  return render(request,'products/all_prod.html',context)
+
+

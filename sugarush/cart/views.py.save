@@ -1,0 +1,95 @@
+from django.shortcuts import render
+from django.http import HttpResponse
+from products.models import Products,Shops
+from .models import ProductInOrder,StatusCode,Order
+from django.http import HttpResponseRedirect
+from django.shortcuts import redirect
+from django.core.mail import send_mail
+from reportlab.pdfgen import canvas
+from django.http import HttpResponse
+from datetime import datetime
+from accounts.models import MyUser
+from django.core.mail import EmailMessage
+
+# Create your views here.
+
+def add_to_cart(request):
+ if not request.user.is_authenticated():
+    return HttpResponse("Please Login First")		
+
+
+ if request.is_ajax():
+    print('execute')
+
+    ourid = request.GET.get('id','')
+    if ourid == 'initial':
+     ordercheck=Order.objects.filter(customer=request.user,status_code='1')
+     y=ProductInOrder.objects.filter(order=ordercheck[0])
+     print('execute')
+     return HttpResponse(" ,"+str(len(y)))
+
+
+    info=Products.objects.filter(id=ourid)	    
+    
+    print (info[0].name +"  "+str(info[0].shop)+" "+str(info[0].price))
+    ordercheck=Order.objects.filter(customer=request.user,status_code='1')
+    
+    print(ordercheck[0].id)	
+    if len(ordercheck) != 0:
+     print("order exixts")
+     x=ProductInOrder.objects.filter(order=ordercheck[0],product=info[0])
+     if(len(x) != 0):
+      y=ProductInOrder.objects.filter(order=ordercheck[0]) 
+      return HttpResponse('Already present in Cart '+str(request.user)+','+str(len(y))) 
+     else:
+      s=ProductInOrder.objects.create(order=ordercheck[0],product=info[0],unit_price=info[0].price,quantity=1,total_price=1*info[0].price)
+
+			
+    else:	
+     q=Order.objects.create(customer=request.user,total_price=0)	
+     print(q)
+     #x=1*info[0]*unit_price
+     s=ProductInOrder.objects.create(order=q,product=info[0],unit_price=info[0].price,quantity=1,total_price=1*info[0].price)
+     y=ProductInOrder.objects.filter(order=ordercheck[0])
+    return HttpResponse(ourid+" "+str(info[0].name)+" added to cart ,"+str(len(y)))
+ return HttpResponse('hi')
+
+
+def cart(request):
+ if request.user.is_authenticated():
+  ordercheck=Order.objects.filter(customer=request.user,status_code='1')
+  x=ProductInOrder.objects.filter(order=ordercheck[0])
+  context={'id':ordercheck[0].id,'order_list': x ,'shop_list' : Shops.objects.all(),'prod_list' : Products.objects.all()} 
+  return render(request,'cart/cart.html',context)	
+
+
+def deleteitem(request,order_id=None,product_id=None):
+  if request.user.is_authenticated():
+   ProductInOrder.objects.filter(order_id=order_id,product_id=product_id).delete()
+  return redirect("cart")
+
+
+def cartupdate(request,order_id=None):
+ if request.user.is_authenticated():
+  
+  if request.is_ajax():
+    print('update')
+    total = request.GET.getlist('totalprice[]')
+    qty=request.GET.getlist('quant[]')
+    for x in total:
+     print(x) 
+    for y in qty:
+     print(y)
+    i=0
+    for b in ProductInOrder.objects.filter(order_id=order_id):
+     b.quantity=qty[i]
+     b.total_price=total[i]
+     b.save(); 
+     i=i+1
+
+
+ return redirect("cart")
+
+def checkout(request,order_id=None):
+ if request.user.is_authenticated():
+    

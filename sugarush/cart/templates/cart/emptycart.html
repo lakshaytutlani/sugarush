@@ -1,0 +1,72 @@
+{% extends 'products/frontpage.html' %}
+
+{% load staticfiles %}
+
+ {% block page_title %} Cart {{ request.user }}{% endblock %}
+
+
+{% block get_list %}
+
+  {{ block.super }}
+
+ {% endblock %}
+
+ {% block activity %}
+
+  {{ block.super }}
+
+ {% endblock %}
+
+ {% block extra_css %}
+
+  <style>
+  h1{
+    margin-left:30px;
+    }
+
+  #main{
+    margin-right: 30px;
+    margin-left: 30px;
+    }
+
+  #desription{
+    margin-left:10px;
+
+   }
+   </style>
+{% endblock %}
+
+
+
+
+ {% block content %}
+
+
+  <div>
+<h1 class="brown-text text-darken-4 align-center">Cart</h1>
+  </div>
+  <div id="main" class='card'>
+
+   <table class="responsive-table striped bordered">
+        <thead id="top" class="card-panel deep-orange darken-2 center-align" >
+          <tr>
+              <th data-field="description" class="center-align">Item</th>
+              <th data-field="name" class="center-align">Price</th>
+              <th data-field="price" class="center-align">Quantity</th>
+              <th data-field="price" class="center-align">Total Price</th>
+              <th data-field="price" class="center-align">Remove</th>
+
+          </tr>
+        </thead>
+
+        <tbody>
+
+          <tr> Empty Cart </tr>
+        
+
+
+</tbody>
+</table>
+</div>
+{% endblock %}
+

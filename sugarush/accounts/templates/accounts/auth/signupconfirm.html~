@@ -1,0 +1,21 @@
+{% extends 'common/index.html' %}
+ {% block title %} Email Sent{% endblock %}
+ {% block content %}
+  <div class="row">
+
+     <div class="col s12 m8 l6 offset-m2 offset-l3">
+         <div class="card-panel deep-orange darken-4">
+             <h4 class='brown-text text-darken-2'>
+ Hey, <b>{{ u.username }}.</b> Activate your account my clicking the link send to you on your email id.
+             </h4>
+           </div>
+ <div class="row">
+                
+                 </div>
+ </div>
+     </div>
+
+
+
+ {% endblock %}
+

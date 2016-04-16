@@ -1,0 +1,157 @@
+
+{% extends "common/index.html" %} {% block content %}
+{% load staticfiles %}
+
+
+{% block content %}
+  <main>  
+  <div class="deep-orange darken-2">
+    <div id="homediv" class="valign-wrapper">     
+        <div class="transbox">
+        <div><h2 class="valign orange-text text-darken-4">Order delicious food online!</h2></div>
+                <div><h4 class="valign orange-text text-darken-4">Order food online from the best restaurants near you</h4></div>
+                
+                <div class="box">
+  <div class="container-1">
+      <span class="icon"><i class="fa fa-search"></i></span>
+      <input type="search" id="search"  placeholder="Search..." />
+  </div>
+</div>
+            
+        </div>    
+        </div>     
+        </div>
+        
+        
+        <div class="deep-orange darken-2">
+        <br>
+            <h3 class="center-align test-brown text-darken-2">What We Do</h3>
+        <br>
+            
+        </div>    
+        
+        <div class="row center-align deep-orange darken-2">
+                    
+                    <div class="col s4 ">
+                        <div>
+                        <img height=80px src="{% static 'common/img/work5.gif' %}">
+                        </div>
+                            <h5>Log In First !!</h5>
+                        <p>
+                             Login first by creating an account, search for neccessary product.  
+                        </p>
+                    </div>
+                    
+                    <div class="col s4">
+                        <div>
+                         <img height=80px src="{% static 'common/img/work2.png' %}">
+                        </div>
+                            <h5>Place Order !!</h5>
+                        <p>
+                           Add the product to your cart and move to checkout and make payment.
+                        </p>
+                    </div>
+                    
+                    <div class="col s4">
+                        <div>
+                        <img height=80px src="{% static 'common/img/work3.png' %}">
+                        </div>
+                            <h5>We will Deliver !!</h5>
+                        <p>
+                           Order will be delivered to you in minimum 45 minutes.
+                        </p>
+                    </div>
+                </div>
+        
+        
+        
+        <div class="slider deep-orange darken-2 ">
+    <ul class="slides">
+      <li>
+        <img src="{% static 'common/img/sweetmain1.jpg' %}"> <!-- random image -->
+        <div class="caption center-align black-text">
+          <h3>Delicious sweets of famous brands</h3>
+        </div>
+      </li>
+        <li>
+        <img src="{% static 'common/img/sweetmain5.jpg' %}">
+        <div class="caption right-align black-text">
+          <h3>Serving Delightful snacks</h3>
+        </div>
+      </li>
+      <li>
+        <img src="{% static 'common/img/sweetmain4.JPG' %}">
+        <div class="caption center-align">
+          <h3>Serving our own specialities</h3>
+        </div>
+      </li> 
+      <li>
+        <img src="{% static 'common/img/sweetmain2.jpg' %}">
+        <div class="caption left-align">
+          <h3>Collaboration with famous shops all over Delhi-NCR</h3>
+        </div>
+      </li>
+      <li>
+        <img src="{% static 'common/img/sweetmain3.jpg' %}">
+        <div class="caption right-align">
+          <h3>Hot Food served right at your doorsteps</h3>
+        </div>
+      </li>
+      
+    </ul>
+  </div>
+        
+                
+        <div class="deep-orange darken-2">
+        <br>
+            <h3 class="center-align test-brown text-darken-2">Special Products Offered</h3>
+        <br>
+            
+        </div> 
+
+        
+        
+        <div class="carousel deep-orange darken-2 " id="product">
+            
+            <a class="carousel-item" href="#one!">
+                <div class="card">
+                    <div class="card-image"><img src="{%  static 'common/img/sweetsinbox.com/1.jpg' %}"></div>
+                    <div  class="center-align brown-text text-darken-4 card-content"><b>Aggarwal Aaloo Bhujia</b></div>                 </div></a>
+            <a class="carousel-item" href="#two!"><div class="card"><div class="card-image"><img src="{% static 'common/img/sweetsinbox.com/2.jpg' %}"></div><div class="center-align brown-text text-darken-4 card-content"><b>Bikaneri Rasmalaii</b></div></div></a>
+            <a class="carousel-item" href="#three!"><div class="card"><div class="card-image"><img src="{% static 'common/img/sweetsinbox.com/4.jpg' %}"></div><div class="center-align brown-text text-darken-4 card-content"><b>Standard Pinniya</b></div></div></a>
+            <a class="carousel-item" href="#four!"><div class="card"><div class="card-image"><img src="{% static 'common/img/sweetsinbox.com/6.jpg' %}"></div><div class="center-align brown-text text-darken-4 card-content"><b>Anjallika Muffins</b></div></div></a>
+            
+            <a class="carousel-item" href="#five!"><div class="card"><div class="card-image"><img src="{% static 'common/img/sweetsinbox.com/9.jpg' %}"></div><div class="center-align brown-text text-darken-4 card-content"><b>Roshan Bhel Puri</b></div></div></a>
+            <a class="carousel-item" href="#six!"><div class="card"><div class="card-image"><img src="{% static 'common/img/sweetsinbox.com/17.jpg' %}"></div><div class="center-align brown-text text-darken-4 card-content"><b>Frontier Cookies</b></div></div></a>
+            <a class="carousel-item" href="#seven!"><div class="card"><div class="card-image"><img src="{% static 'common/img/sweetsinbox.com/18.jpg' %}"></div><div class="center-align brown-text text-darken-4 card-content"><b>Gopaljee Rasgulla</b></div></div></a> 
+            <a class="carousel-item" href="#eight!"><div class="card"><div class="card-image"><img src="{% static 'common/img/sweetsinbox.com/20.jpg' %}"></div><div class="center-align brown-text text-darken-4 card-content"><b>Om Bhature Cholle</b></div></div></a> 
+            <a class="carousel-item" href="#nine!"><div class="card"><div class="card-image"><img src="{% static 'common/img/sweetsinbox.com/21.jpg' %}"></div><div class="center-align brown-text text-darken-4 card-content"><b>Gopal's Halwa</b></div></div></a> 
+</div>
+    
+        <div>
+            
+            <br>
+            <h3 class="center-align test-brown text-darken-2">Our Trusted Brands</h3>
+        <br>
+            
+        </div>    
+        
+        <div>
+                        <ul class="row" id="pic">
+                        <li class="col s3 center-align card"><div class="card-image"><img src="{% static 'common/img/sweetsinbox.com/company1.png' %}" alt="w1" height="250px" width="250px"></div></li>
+                        <li class="col s3 center-align card"><div class="card-image"><img src="{% static 'common/img/sweetsinbox.com/company2.png' %}" alt="w1" height="250px" width="250px"></div></li>
+                        <li class="col s3 center-align card"><div class="card-image"><img src="{% static 'common/img/sweetsinbox.com/company3.png' %}" alt="w1" height="250px" width="250px"></div></li>
+                        <li class="col s3 center-align card"><div class="card-image"><img src="{% static 'common/img/sweetsinbox.com/company4.png' %}" alt="w1" height="250px" width="250px"></div></li>
+                            <li class="col s3 center-align card"><div class="card-image"><img src="{% static 'common/img/sweetsinbox.com/company5.png' %}" alt="w1" height="250px" width="250px"></div></li>
+                            <li class="col s3 center-align card"><div class="card-image"><img src="{% static 'common/img/sweetsinbox.com/company6.png' %}" alt="w1" height="250px" width="250px"></div></li>
+                            <li class="col s3 center-align card"><div class="card-image"><img src="{% static 'common/img/sweetsinbox.com/company7.png' %}" alt="w1" height="250px" width="250px"></div></li>
+                            <li class="col s3 center-align card"><div class="card-image"><img src="{% static 'common/img/sweetsinbox.com/company8.png' %}" alt="w1" height="250px" width="250px"></div></li>
+                            </ul>
+                            
+                            
+                            
+                        </div>
+        
+        
+        </main>    
+    {% endblock %}

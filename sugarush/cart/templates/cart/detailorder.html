@@ -1,0 +1,91 @@
+{% extends 'products/frontpage.html' %}
+
+{% load staticfiles %}
+
+ {% block page_title %} Details {{ request.user }}{% endblock %}
+
+
+{% block get_list %}
+
+  {{ block.super }}
+
+ {% endblock %}
+
+ {% block activity %}
+
+  {{ block.super }}
+
+ {% endblock %}
+
+ {% block extra_css %}
+
+  <style>
+  h1{
+    margin-left:30px;
+    }
+
+  #main{
+    margin-right: 30px;
+    margin-left: 30px;
+    }
+
+  td{
+    height:75px;
+ }
+
+
+
+   </style>
+{% endblock %}
+{% block content %}
+
+<div>
+<h1 class="brown-text text-darken-4 align-center">Detail Order</h1>
+  </div>
+  <div id="main" class='card'>
+
+   <table class="responsive-table striped bordered">
+        <thead class="deep-orange darken-2 center-align spaceunder" >
+          <tr>
+              <th data-field="description" class="center-align">Product Name</th>
+               <th data-field="description" class="center-align">Shop Name</th> 
+              <th data-field="name" class="center-align">Quantity</th>
+              <th data-field="price" class="center-align">Unit Price</th>
+              <th data-field="price" class="center-align">Total Price</th>
+
+          </tr>
+        </thead>  
+        <tbody>
+        
+       <tr class="row">
+
+            {% for y in allproducts %}
+                {% for z in product %}
+                 {% if z.id == y.product_id %}  
+                <td class="center-align col s3 brown-text text-darken-2"><b>{{ z.name }}</b></td>
+                 {% for t in shop %}
+                  {% if t.id == z.shop_id %}
+                <td class="center-align col s3 deep-orange-text text-darken-4"><i>{{ t.shop_name }}</i></td>
+                  {% endif %}
+                 {% endfor %}
+                 
+
+                {% endif %}
+                 {% endfor %}
+ 
+                <td class="center-align col s2 brown-text text-darken-2">{{  y.quantity }}&nbsp;&nbsp; {{ y.qty_type }}</td>
+                <td class="center-align col s2 deep-orange-text text-darken-4">&#8377;&nbsp;{{ y.unit_price }}</td>
+                 <td class="center-align col s2 brown-text text-darken-2"><b><i>&#8377;&nbsp;{{ y.total_price }}</i></b></td>
+
+
+
+</tr>
+{% endfor %}
+
+
+
+</tbody>
+</table>
+</div>
+{% endblock %}
+

@@ -1,0 +1,101 @@
+{% extends 'products/frontpage.html' %}
+{% load staticfiles %}
+
+{% block page_title %} Contact Us {% endblock %}
+
+{% block extra_css %}
+   <style>
+   #main{
+       margin:30px;
+  }
+
+  h5{
+
+  color:blue;
+ }
+  p{
+
+  color:brown;
+}
+ #googleMap {
+        width: 500px;
+        height: 500px;
+        margin:auto;
+      }
+
+   </style> 
+ 
+
+
+{% endblock %}
+{% block get_list %}
+
+  {{ block.super }}
+
+ {% endblock %}
+
+ {% block activity %}
+
+  {{ block.super }}
+
+ {% endblock %}
+ {% block content %}
+ <div class="row center-align" id="main">
+
+     <div class="divider"></div>
+  <div>
+    <h5 class="center-align">Email us at:</h5>
+    <p>sugarush@gmail.com,lakshaytutlani@gmail.com</p>
+  </div>
+  <div class="divider"></div>
+  <div class="section">
+    <h5>Contact us at:</h5>
+    <p>9873309674,9953444417</p>
+  </div>
+  <div class="divider"></div>
+  <div class="section">
+    <h5>Bulk Orders:</h5>
+    <p>We also book bulk orders and catering orders.Feel free to contact</p>
+  </div>
+  <div class="section">
+    <h5>Address:</h5>
+    <div id="googleMap" class="center-align">
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block extra_script %}
+ <script
+src="http://maps.googleapis.com/maps/api/js">
+</script>
+
+<script>
+var myCenter=new google.maps.LatLng(28.5946,77.0207);
+var marker;
+
+function initialize()
+{
+var mapProp = {
+  center:myCenter,
+  zoom:15,
+  mapTypeId:google.maps.MapTypeId.ROADMAP
+  };
+
+var map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
+
+var marker=new google.maps.Marker({
+  position:myCenter,
+  animation:google.maps.Animation.BOUNCE
+  });
+
+marker.setMap(map);
+}
+
+google.maps.event.addDomListener(window, 'load', initialize);
+</script>
+{% endblock %} 
+
+
+
+

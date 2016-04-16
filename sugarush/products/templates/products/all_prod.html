@@ -1,0 +1,179 @@
+ 
+{% extends "common/index.html" %}
+
+{% load staticfiles %}
+
+
+{% block page_title %}PRODUCT LIST{% endblock %}
+
+
+{% block get_list %}
+ <ul id="dropdown2" class="dropdown-content">
+ {% for q in  shop_list %}
+
+   <li><a href="{% url 'shopshow' id=q.id %}" class="deep-orange-text text-darken-2">{{ q.shop_name }}</a></li>
+
+ {% endfor %}
+ </ul>
+ {% endblock %}
+
+ {% block activity %}
+
+  data-activates="dropdown2"
+
+ {% endblock %}
+
+ {% block extra_css %}
+   
+   <style>
+
+   ul li a{
+   
+    color:brown;
+
+     }
+   
+   ul li a:hover{
+     color:orange;
+   }
+   </style>
+ {% endblock %}
+
+
+{% block content %}
+
+<div class="slider">
+    <ul class="slides">
+      <li>
+        <img src="{% static 'common/img/sweetmain1.jpg' %}"> <!-- random image -->
+        <div class="caption center-align black-text">
+          <h3>Delicious sweets of famous brands</h3>
+        </div>
+      </li>
+        <li>
+        <img src="{% static 'common/img/sweetmain5.jpg' %}">
+        <div class="caption right-align black-text">
+          <h3>Serving Delightful snacks</h3>
+        </div>
+      </li>
+      <li>
+        <img src="{% static 'common/img/sweetmain4.JPG' %}">
+        <div class="caption center-align">
+          <h3>Serving our own specialities</h3>
+        </div>
+      </li> 
+      <li>
+        <img src="{% static 'common/img/sweetmain2.jpg' %}">
+        <div class="caption left-align">
+          <h3>Collaboration with famous shops all over Delhi-NCR</h3>
+        </div>
+      </li>
+      <li>
+        <img src="{% static 'common/img/sweetmain3.jpg' %}">
+        <div class="caption right-align">
+          <h3>Hot Food served right at your doorsteps</h3>
+        </div>
+      </li>
+      
+    </ul>
+
+<div>
+        <br>
+            <h3 class="center-align test-brown text-darken-2">{{ heading }}</h3>
+        <br>
+
+</div>
+
+<div class="row">
+<div class="col s2 card z-depth-2">
+  <div>
+    <h5 class="brown-text text-darken-2"><u>Category/Type&nbsp;&nbsp;&nbsp;</u></h5>
+  </div>
+  <div>
+  <ul>
+    <li><a href="{% url 'allsnacks'%}">snacks</a></li>
+    <li><a href="{% url 'allsweets'%}">sweets</a></li> 
+  </ul>
+  </div>
+  <div>
+    <h5 class="brown-text text-darken-2"><u>All Products</h5>
+  </div>
+  <div>
+  <ul>
+    {% for q in prod_list %}
+     <li><a href="{% url 'oneproduct' id=q.id%}">{{ q.name }}</a></li>
+    {% endfor %}
+  </ul>
+  </div>
+   <div>
+    <h5 class="brown-text text-darken-2"><u>Filter By</h5>
+  </div>
+  <div>
+  <ul>
+    <li><a href="{% url 'sortedProduct' id=1%}">Price Min To Max</a></li>
+    <li><a href="{% url 'sortedProduct' id=2%}">Price Max To Min</a></li>
+  </ul>
+  </div>
+
+</div>
+<div class="card z-depth-2 col s10">
+<ul class="row">
+{% for q in prod_list %}
+ 
+  <li class="col s4 center-align">
+  <div class="card z-depth-4 hoverable">
+    <div class="card-image"><img src="{{ q.image.url }}" width=150px height=200px></div>
+     <div  class="center-align brown-text text-darken-4 card-content">
+            <span class="deep-orange-text text-darken-4">
+            {% for x in shop_list %}
+              {% if x.id == q.shop_id %}  
+                {{ x.shop_name }}
+              {% endif %} 
+            {% endfor %} 
+            </span> 
+            <br> 
+            <b><i class="brown-text text-darken-2 ">{{ q.name }}</i></b>
+            <br>&#8377;{{ q.price }}&nbsp;&nbsp;{{ q.qty_type }}<br>{{ q.type }}  
+            <br>
+            <div class="col s12">
+                      <button type="submit" id ="login-btn" name="login" class="btn waves-effect waves-light center deep-orange darken-4" value={{ q.id }}>ADD TO CART</button>
+             </div>
+             <br> 
+
+	<p id="demo"></p>	
+             </div>
+
+
+</li>
+              
+
+ {% endfor %}
+</ul>
+</div>
+</div>
+
+{% endblock %}
+{% block extra_script %}
+
+<script>
+
+$(document).on('click','#login-btn',
+    function(){
+	$.ajax({
+        url: "{% url 'addtocart'  %}",
+        type: 'GET',
+        data: {'id':$(this).val()},
+	dataType: 'html',
+        success: function(data){
+        var val=data.split(',')
+        var value=String(val[1]) 
+	Materialize.toast(val[0],'4000','rounded deep-orange brown-text text-darken-4 animated bounceInUp')
+        $("#cartval").html(value)
+
+          }
+    });       
+    });		
+</script>
+
+{% endblock %}
+                       

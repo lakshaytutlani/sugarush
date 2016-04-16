@@ -1,0 +1,205 @@
+{% extends 'products/frontpage.html' %}
+
+{% load staticfiles %}
+
+ {% block page_title %} Cart {{ request.user }}{% endblock %}
+
+ {% block extra_css %}
+ <link rel="stylesheet" href='{% static "accounts/css/base.css" %}'/>
+
+  <style>
+  h1{
+    margin-left:30px;
+    }
+
+  #main{
+    margin-right: 30px;
+    margin-left: 30px;
+    }
+
+  #desription{
+    margin-left:10px;
+
+   }
+   </style>
+
+
+ {% endblock %}
+
+{% block get_list %}
+
+  {{ block.super }}
+
+ {% endblock %}
+
+ {% block activity %}
+
+  {{ block.super }}
+
+ {% endblock %}
+
+
+
+ {% block content %}
+
+
+  <div>
+<h1 class="brown-text text-darken-4 align-center">Cart</h1>
+  </div>
+  <div id="main" class='card'>
+   
+   <table class="responsive-table striped bordered">
+        <thead id="top" class="card-panel deep-orange darken-2 center-align" >
+          <tr>
+              <th data-field="description" class="center-align">Item</th>
+              <th data-field="name" class="center-align">Price</th>
+              <th data-field="price" class="center-align">Quantity</th>
+	      <th data-field="price" class="center-align">Total Price</th>
+              <th data-field="price" class="center-align">Remove</th>
+
+          </tr>
+        </thead>
+
+        <tbody>
+   
+
+      
+   {% for x in order_list %}
+   
+
+    <tr class="row">
+            
+            {% for y in prod_list %}
+              {% if y.id == x.product_id %}
+                <td class="left-align col s5">
+                <div class="col s4">
+                 <img src="{{ y.image.url }}" width=75px height=75px class="circle">
+                </div>
+                <div id='description' class="brown-text text-darken-2"><font size="5"><b> {{ y.name }} </b></font>
+                <p class="deep-orange-text text-darken-4">
+                   {% for t in shop_list %}
+              {% if t.id == y.shop_id %}
+               <i> {{ t.shop_name }}&nbsp;,{{ t.shop_address }}&nbsp;,{{ t.shop_pincode}} </i>
+              {% endif %}
+            {% endfor %}
+              <td class="col s2 brown-text text-darken-2 center-align">&#8377;&nbsp;<span class="unitprice">{{ x.unit_price }}</span>&nbsp;{{ y.qty_type }}</td>
+
+                  
+                </p>
+                </div></td>
+                  
+              {% endif %}  
+            {% endfor %}
+            
+            
+            <td class="col s2 brown-text text-darken-2 row center-align">
+             <div class="input-field col s10">
+            		<select id="selectboxid">
+                        <option value={{ x.quantity }}>{{ x.quantity }}</option>
+   			<option value="1">1</option>
+			<option value="2">2</option>
+			<option value="3">3</option>
+			<option value="4">4</option>
+			<option value="5">5</option>
+			<option value="6">6</option>
+			<option value="7">7</option>
+			<option value="8">8</option>
+			<option value="9">9</option>
+			<option value="10">10</option>
+			</select>
+		</div>
+            </td>
+            <td class="col s2 brown-text text-darken-2 center-align">&#8377;&nbsp;<span class="total">{{ x.total_price }}</span></td>
+            <td class="col s1 center-align"><a href="{% url 'deleteitem' order_id=x.order_id product_id=x.product_id %}"><i class="fa fa-trash-o"></i></a></td>
+
+         </tr>
+                 
+  
+ 
+
+
+{% endfor %}      
+
+ 
+                
+	</tbody>
+</table>
+<div class="row card-action">
+              <div class="col s5 row offset-s7 brown-text text-darken-2"><font size='5'><span class="col s6"><b>Total Amount:&nbsp;&nbsp;&#8377;</b></span>
+<span id='value' class="col s2 deep-orange-text text-darken-4"></span></font>
+ <a href="{% url 'checkout' order_id=id %}"class="btn waves-effect waves-light deep-orange darken-4 col s4" type="submit" name="action">Check Out&nbsp;
+    <i class="material-icons right">send</i>
+  </a>
+              </div>
+         </div>
+    
+</div>
+ 
+ {% endblock %}
+ {% block extra_script %}
+
+  <script>
+ var arr = [];
+ var qty=[];
+ var total=[];
+ var value=0;
+ j = 0;
+ q = 0;
+ t = 0;
+  $(document).ready(function() {
+    $('select').material_select();
+     
+    $('.unitprice').each(function(i){
+      arr[j++]=parseInt(this.textContent)
+      
+      });
+     $('select').each(function(i){
+      qty[q++]=parseInt(this.value)
+      
+      });
+     $('.total').each(function(i){
+      total[t]=parseInt(this.textContent)//arr[t]*qty[t]
+      value=value+total[t]  
+      console.log(total[t])
+      $(this).text(total[t])
+      t++
+      });
+     $('#value').text(value);	
+
+     $.ajax({ url: "{% url 'cartupdate' order_id=id %}", type: "GET" ,data: {'quant[]':qty,'totalprice[]':total}, success: function(){
+
+     //alert('data send successfully')
+  }});
+ 
+     
+  });
+
+
+ $('select').change(function() {
+  var x=0;
+  var z=0;
+  $('select').each(function(i){
+      qty[x++]=parseInt(this.value)
+      total[z]=qty[z]*arr[z]
+      console.log(total[z])
+      z++
+       });
+  t=0
+  var newval=0
+  $('.total').each(function(i){
+      $(this).text(total[t])
+      newval=newval+total[t]
+      t++
+      });
+   $('#value').text(newval)
+
+  $.ajax({ url: "{% url 'cartupdate' order_id=id %}", type: "GET" ,data: {'quant[]':qty,'totalprice[]':total }, success: function(){
+     //alert('data send successfully')
+  }});
+ });
+
+
+  </script>
+ {% endblock %}
+
+

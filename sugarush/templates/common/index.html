@@ -1,0 +1,309 @@
+
+{% load staticfiles %}
+
+<html>
+    <head>
+      <title>{% block page_title %}Sugarush Home Page{% endblock %}</title>
+      <!--Import Google Icon Font-->
+      <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      <!--Import materialize.css-->
+      <link type="text/css" rel="stylesheet" href='{% static "common/css/materialize/css/materialize.min.css" %}'  media="screen,projection"/>
+      <link rel="stylesheet" href='{% static "common/css/font-awesome-4.5.0/css/font-awesome.min.css" %}'>
+        <link rel="stylesheet" href='{% static "common/css/animate.css" %}'>
+      <link rel="stylesheet" href='{% static "common/css/main.css" %}'/>   
+      {% block extra_css %}{% endblock %}  
+      <!--Let browser know website is optimized for mobile-->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <style>
+    #circle{
+        
+         width:50px;
+         height:50px;
+         padding:2px;
+         border:3px solid orange;    
+         border-radius:50%; 
+      }
+    </style>
+    </head>
+     
+    <body>
+      <!--Import jQuery before materialize.js-->
+        
+        <header>
+        <nav id="nav">
+            <div class="nav-wrapper brown darken-4">
+                <span class="deep-orange-text text-darken-2">&nbsp;&nbsp;We deliver India's finest snacks and sweets to your doorstep</span>
+               
+        <ul id="nav-mobile" class="right hide-on-med-and-down ">
+        {% if not user.is_authenticated %}  
+	  <li><a href="#Cart" class="deep-orange-text text-darken-2">Cart&nbsp;<i class="fa fa-shopping-cart"></i></a></li>
+          <li><a href="{% url 'sign_up' %}" class="deep-orange-text text-darken-2">Register&nbsp;<i class="fa fa-plus-circle"></i></a></li>
+          <li><a href="{% url 'login' %}" class="deep-orange-text text-darken-2">Login&nbsp;<i class="fa fa-sign-in"></i></a></li>
+        {% endif %}
+	{% if user.is_authenticated %}
+        <ul id="dropdown3" class="dropdown-content">
+  		<li><a href="{% url 'updatesignup'%}" class="deep-orange-text text-darken-2"><i class="fa fa-users"></i>&nbsp;Profile  </a></li>
+  		<li><a href="{% url 'order' %}" class="deep-orange-text text-darken-2"><i class="fa fa-book"></i>&nbsp;Orders 
+</a></li>
+  		<li class="divider"></li>
+  		<li><a href="{% url 'logout' %}"  class="deep-orange-text text-darken-2"><i class="fa fa-sign-in"></i>&nbsp;Logout </a></li>
+	</ul>
+        <li><a href="{% url 'cart' %}" class="deep-orange-text text-darken-2"><span id='circle' class="brown darken-2">&nbsp;<span id="cartval" class="white-text">&nbsp;</span>&nbsp;</span>&nbsp;&nbsp;Cart&nbsp;<i class="fa fa-shopping-cart"></i></a></li>
+        <li class="deep-orange-text text-darken-2" ><a data-activates="dropdown3" href="#profile" class="deep-orange-text text-darken-2 dropdown-button">Welcome, {{user.username}}&nbsp;<i class="fa fa-user"></i><i class="material-icons right">arrow_drop_down</i></a></li>
+        {% endif %}
+			
+      </ul>
+        
+        </div>
+    </nav>
+        </header>        
+        
+    
+            <div id='head'>
+                <nav>
+    <div class="nav-wrapper white">
+
+    
+        
+    <img id='imglogo' src='{% static "common/img/sugar_burned.png" %}' class="animated slideInLeft">
+                <a href="{% url 'index' %}" id='logo' class="brand-logo deep-orange-text text-darken-2 animated lightSpeedIn">Sugarush</a>
+        
+        <ul id="dropdown1" class="dropdown-content">
+  		<li><a href="{% url 'allsweets' %}" class="deep-orange-text text-darken-2">sweet parlour</a></li>
+  		<li><a href="{% url 'allsnacks' %}" class="deep-orange-text text-darken-2">snack parlour</a></li>
+  		<li class="divider"></li>
+  		<li><a href="{% url 'allproducts' %}" class="deep-orange-text text-darken-2">all products</a></li>
+	</ul>
+        {% block get_list %}
+
+
+        {% endblock %} 
+                <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li><a href="#brands" class="deep-orange-text text-darken-2 dropdown-button" {% block activity %} {% endblock %}>OUR BRANDS<i class="material-icons right">arrow_drop_down</i></a></li>
+        <li><a href="#products" class="deep-orange-text text-darken-2 dropdown-button" data-activates="dropdown1">PLACE ORDER<i class="material-icons right">arrow_drop_down</i></a></li>
+         <li><a href="{% url 'whatwedo' %}" class="deep-orange-text text-darken-2">HOW IT WORKS</a></li>
+         <li><a href="{% url 'contactus' %}" class="deep-orange-text text-darken-2">CONTACT US</a></li>            
+                    </ul>
+        
+            
+        </div>    
+             
+        </div>
+  </nav>
+            </div>
+    {% block content %}
+  <main>  
+  <div class="deep-orange darken-2">
+    <div id="homediv" class="valign-wrapper">     
+        <div class="transbox">
+        <div><h2 class="valign orange-text text-darken-4">Order delicious food online!</h2></div>
+                <div><h4 class="valign orange-text text-darken-4">Order food online from the best restaurants near you</h4></div>
+                
+                <div class="box">
+  <div class="container-1">
+      <span class="icon"><i class="fa fa-search"></i></span>
+      <input type="search" id="search"  placeholder="Search..." />
+  </div>
+</div>
+            
+        </div>    
+        </div>     
+        </div>
+        
+        
+        <div class="deep-orange darken-2">
+        <br>
+            <h3 class="center-align test-brown text-darken-2">What We Do</h3>
+        <br>
+            
+        </div>    
+        
+        <div class="row center-align deep-orange darken-2">
+                    
+                    <div class="col s4 ">
+                        <div>
+                        <img height=80px src="{% static 'common/img/work5.gif' %}">
+                        </div>
+                            <h5>Log In First !!</h5>
+                        <p>
+                             Login first by creating an account, search for neccessary product.  
+                        </p>
+                    </div>
+                    
+                    <div class="col s4">
+                        <div>
+                         <img height=80px src="{% static 'common/img/work2.png' %}">
+                        </div>
+                            <h5>Place Order !!</h5>
+                        <p>
+                           Add the product to your cart and move to checkout and make payment.
+                        </p>
+                    </div>
+                    
+                    <div class="col s4">
+                        <div>
+                        <img height=80px src="{% static 'common/img/work3.png' %}">
+                        </div>
+                            <h5>We will Deliver !!</h5>
+                        <p>
+                           Order will be delivered to you in minimum 45 minutes.
+                        </p>
+                    </div>
+                </div>
+        
+        
+        
+        <div class="slider deep-orange darken-2 ">
+    <ul class="slides">
+      <li>
+        <img src="{% static 'common/img/sweetmain1.jpg' %}"> <!-- random image -->
+        <div class="caption center-align black-text">
+          <h3>Delicious sweets of famous brands</h3>
+        </div>
+      </li>
+        <li>
+        <img src="{% static 'common/img/sweetmain5.jpg' %}">
+        <div class="caption right-align black-text">
+          <h3>Serving Delightful snacks</h3>
+        </div>
+      </li>
+      <li>
+        <img src="{% static 'common/img/sweetmain4.JPG' %}">
+        <div class="caption center-align">
+          <h3>Serving our own specialities</h3>
+        </div>
+      </li> 
+      <li>
+        <img src="{% static 'common/img/sweetmain2.jpg' %}">
+        <div class="caption left-align">
+          <h3>Collaboration with famous shops all over Delhi-NCR</h3>
+        </div>
+      </li>
+      <li>
+        <img src="{% static 'common/img/sweetmain3.jpg' %}">
+        <div class="caption right-align">
+          <h3>Hot Food served right at your doorsteps</h3>
+        </div>
+      </li>
+      
+    </ul>
+  </div>
+        
+                
+        <div class="deep-orange darken-2">
+        <br>
+            <h3 class="center-align test-brown text-darken-2">Special Products Offered</h3>
+        <br>
+            
+        </div> 
+
+        
+        
+        <div class="carousel deep-orange darken-2 " id="product">
+            
+            <a class="carousel-item" href="#one!">
+                <div class="card">
+                    <div class="card-image"><img src="{%  static 'common/img/sweetsinbox.com/1.jpg' %}"></div>
+                    <div  class="center-align brown-text text-darken-4 card-content"><b>Aggarwal Aaloo Bhujia</b></div>                 </div></a>
+            <a class="carousel-item" href="#two!"><div class="card"><div class="card-image"><img src="{% static 'common/img/sweetsinbox.com/2.jpg' %}"></div><div class="center-align brown-text text-darken-4 card-content"><b>Bikaneri Rasmalaii</b></div></div></a>
+            <a class="carousel-item" href="#three!"><div class="card"><div class="card-image"><img src="{% static 'common/img/sweetsinbox.com/4.jpg' %}"></div><div class="center-align brown-text text-darken-4 card-content"><b>Standard Pinniya</b></div></div></a>
+            <a class="carousel-item" href="#four!"><div class="card"><div class="card-image"><img src="{% static 'common/img/sweetsinbox.com/6.jpg' %}"></div><div class="center-align brown-text text-darken-4 card-content"><b>Anjallika Muffins</b></div></div></a>
+            
+            <a class="carousel-item" href="#five!"><div class="card"><div class="card-image"><img src="{% static 'common/img/sweetsinbox.com/9.jpg' %}"></div><div class="center-align brown-text text-darken-4 card-content"><b>Roshan Bhel Puri</b></div></div></a>
+            <a class="carousel-item" href="#six!"><div class="card"><div class="card-image"><img src="{% static 'common/img/sweetsinbox.com/17.jpg' %}"></div><div class="center-align brown-text text-darken-4 card-content"><b>Frontier Cookies</b></div></div></a>
+            <a class="carousel-item" href="#seven!"><div class="card"><div class="card-image"><img src="{% static 'common/img/sweetsinbox.com/18.jpg' %}"></div><div class="center-align brown-text text-darken-4 card-content"><b>Gopaljee Rasgulla</b></div></div></a> 
+            <a class="carousel-item" href="#eight!"><div class="card"><div class="card-image"><img src="{% static 'common/img/sweetsinbox.com/20.jpg' %}"></div><div class="center-align brown-text text-darken-4 card-content"><b>Om Bhature Cholle</b></div></div></a> 
+            <a class="carousel-item" href="#nine!"><div class="card"><div class="card-image"><img src="{% static 'common/img/sweetsinbox.com/21.jpg' %}"></div><div class="center-align brown-text text-darken-4 card-content"><b>Gopal's Halwa</b></div></div></a> 
+</div>
+    
+        <div>
+            
+            <br>
+            <h3 class="center-align test-brown text-darken-2">Our Trusted Brands</h3>
+        <br>
+            
+        </div>    
+        
+        <div>
+                        <ul class="row" id="pic">
+                        <li class="col s3 center-align card"><div class="card-image"><img src="{% static 'common/img/sweetsinbox.com/company1.png' %}" alt="w1" height="250px" width="250px"></div></li>
+                        <li class="col s3 center-align card"><div class="card-image"><img src="{% static 'common/img/sweetsinbox.com/company2.png' %}" alt="w1" height="250px" width="250px"></div></li>
+                        <li class="col s3 center-align card"><div class="card-image"><img src="{% static 'common/img/sweetsinbox.com/company3.png' %}" alt="w1" height="250px" width="250px"></div></li>
+                        <li class="col s3 center-align card"><div class="card-image"><img src="{% static 'common/img/sweetsinbox.com/company4.png' %}" alt="w1" height="250px" width="250px"></div></li>
+                            <li class="col s3 center-align card"><div class="card-image"><img src="{% static 'common/img/sweetsinbox.com/company5.png' %}" alt="w1" height="250px" width="250px"></div></li>
+                            <li class="col s3 center-align card"><div class="card-image"><img src="{% static 'common/img/sweetsinbox.com/company6.png' %}" alt="w1" height="250px" width="250px"></div></li>
+                            <li class="col s3 center-align card"><div class="card-image"><img src="{% static 'common/img/sweetsinbox.com/company7.png' %}" alt="w1" height="250px" width="250px"></div></li>
+                            <li class="col s3 center-align card"><div class="card-image"><img src="{% static 'common/img/sweetsinbox.com/company8.png' %}" alt="w1" height="250px" width="250px"></div></li>
+                            </ul>
+                            
+                            
+                            
+                        </div>
+        
+        
+        </main>    
+    {% endblock %}
+    <footer class="page-footer brown darken-4 deep-orange-text text-darken-2">
+          <div>
+            <div class="row">
+              <div class="col l6 s12">
+                  <a href="#" id='logo' class="brand-logo deep-orange-text text-darken-2 animated lightSpeedIn"><h2>Sugarush</h2></a>
+                
+              </div>
+              <div class="col l4 offset-l2 s12">
+                
+                
+                  <a class="deep-orange-text text-darken-2" href="#!"><i class="fa fa-facebook fa-2x"></i></a>&nbsp;
+                  <a class="deep-orange-text text-darken-2" href="#!"><i class="fa fa-twitter fa-2x"></i></a>&nbsp;
+                  <a class="deep-orange-text text-darken-2" href="#!"><i class="fa fa-instagram fa-2x"></i></a>&nbsp;
+                  <a class="deep-orange-text text-darken-2" href="#!"><i class="fa fa-google-plus fa-2x"></i></a>
+                <p class="deep-orange-text text-darken-2">
+                    <u>Contact us:</u><br>    
+                    <i class="fa fa-whatsapp fa-2x"><b> +91-9873309674</b></i><br>
+                    <i class="fa fa-whatsapp fa-2x"><b> +91-9953444417</b></i><br>    
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="footer-copyright deep-orange darken-2">
+            <div class="center-align brown-text text-darken-4">
+                <b>Copyright 2016  Sugarush.All rights reserved.</b> 
+            </div>
+          </div>
+        </footer>
+    
+      
+      <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>    
+      <script type="text/javascript" src="{% static 'common/css/materialize/js/materialize.min.js' %}"></script>
+    <script type="text/javascript">
+    $(document).ready(function () {
+    $('.slider').slider({full_width: true});
+});
+        
+        $(document).ready(function(){
+      $('.carousel').carousel();
+    });
+        
+    $(document).ready(function(){
+        $.ajax({
+        url: "{% url 'addtocart'  %}",
+        type: 'GET',
+        data: {'id':'initial'},
+        dataType: 'html',
+        success: function(data){
+        var val=data.split(',')
+        var value=String(val[1])
+        $("#cartval").html(value)
+
+          }
+
+
+    });
+  });
+
+    </script>    
+    {% block extra_script%}
+    {% endblock %} 
+    </body>
+  </html>
+        

@@ -1,0 +1,124 @@
+#head ul li{
+    font-weight: bold;
+}
+
+#imglogo{
+    
+    margin-top: 10px;
+}
+
+
+#logo{
+    padding-left: 10px;
+    font-weight: bold;
+    font-style: italic;
+    font-stretch:ultra-expanded;
+    font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+}
+
+#homediv
+{
+    padding-top: 100px;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    background-image: url('/static/common/img/20.jpg');
+    background-size: cover;
+    display: block;
+    text-align: center;
+    position: relative;
+    min-width: 100%;
+    min-height: 80%;
+    
+   
+}
+
+div.transbox {
+    border-radius: 20px;
+    margin: 30px;
+    background-color:#2b303b;;
+    border: 1px solid black;
+    opacity: 0.8;
+    filter: alpha(opacity=60); /* For IE8 and earlier */
+}
+
+#homediv h2
+{    
+    font-weight: bold;
+    font-style: italic;
+    font-size: 30px;
+    font-family:"Droid", Serif, Italic"; 
+}
+
+
+
+#homediv h4
+{
+    font-weight: bold;
+    font-size: 20px;
+    font-family: "Montserrat";
+}
+
+
+.box{
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    text-align: center;
+}
+
+.container-1{
+      
+  width: 400px;    
+  white-space: nowrap;
+  
+}
+
+.container-1 input#search{
+  width: 300px;
+  height: 50px;
+  background: #6c304a;
+  border: none;
+  font-size: 10pt;
+  float: left;
+  color: #63717f;
+  padding-left: 45px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+}
+
+.container-1 input#search::-webkit-input-placeholder {
+   color: #65737e;
+}
+ 
+.container-1 input#search:-moz-placeholder { /* Firefox 18- */
+   color: #65737e;  
+}
+ 
+.container-1 input#search::-moz-placeholder {  /* Firefox 19+ */
+   color: #65737e;  
+}
+ 
+.container-1 input#search:-ms-input-placeholder {  
+   color: #65737e;  
+}
+
+.container-1 .icon{
+  position: absolute;
+  top: 50%;
+  margin-left: 17px;
+  margin-top: 17px;
+  z-index: 1;
+  color: #4f5b66;
+}
+
+.container-1 input#search:hover, .container-1 input#search:focus, .container-1 input#search:active{
+    outline:none;
+    background: #ffffff;
+  }
+
+#product img{
+    
+    
+}

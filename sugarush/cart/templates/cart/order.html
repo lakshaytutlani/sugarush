@@ -1,0 +1,91 @@
+{% extends 'products/frontpage.html' %}
+
+{% load staticfiles %}
+
+ {% block page_title %} ORDER Placed {{ request.user }}{% endblock %}
+
+
+{% block get_list %}
+
+  {{ block.super }}
+
+ {% endblock %}
+
+ {% block activity %}
+
+  {{ block.super }}
+
+ {% endblock %}
+
+ {% block extra_css %}
+
+  <style>
+  h1{
+    margin-left:30px;
+    }
+
+  #main{
+    margin-right: 30px;
+    margin-left: 30px;
+    }
+  
+  td{
+    height:75px; 
+  }
+ 
+   </style>
+{% endblock %}
+{% block content %}
+
+
+  <div>
+<h1 class="brown-text text-darken-4 align-center">Order Info</h1>
+  </div>
+  <div id="main" class='card'>
+
+   <table class="responsive-table striped bordered">
+        <thead id="top" class="card-panel deep-orange darken-2 center-align" >
+          <tr>
+              <th data-field="description" class="center-align">OrderNo</th>
+              <th data-field="description" class="center-align">Date Placed</th>
+              <th data-field="name" class="center-align">Total Amount</th>
+              <th data-field="price" class="center-align">Status</th>
+              <th data-field="price" class="center-align">Details</th>
+
+          </tr>
+        </thead>
+
+        <tbody>
+
+
+
+            {% for y in order %}
+<tr class="row">          
+                <td class="center-align col s3 deep-orange-text text-darken-4">{{ y.id }}</td>
+                <td class="center-align col s3 deep-orange-text text-darken-4">{{ y.date_placed }}</td>
+ 
+                <td class="center-align col s3 brown-text text-darken-2"><i>{{ y.total_price }}</i></td>
+                {% for z in status %} 
+                 {% if y.status_code_id == z.id %} 
+                <td class="center-align col s3 deep-orange-text text-darken-4"><b>{{  z.short_name }}</b></td>
+                  {% endif %}
+                 {% endfor %} 
+                <td class="center-align col s3">
+                     <a href="{% url 'detailorder' order_id=y.id %}" class="btn waves-effect waves-light deep-orange darken-4 center-align" type="submit" name="action">Details</a>
+    
+  
+
+                </td>                   
+
+</tr>              
+            {% endfor %}
+         
+
+
+</tbody>
+</table>
+</div>
+{% endblock %}
+
+
+

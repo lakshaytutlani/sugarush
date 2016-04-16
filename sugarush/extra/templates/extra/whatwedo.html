@@ -1,0 +1,109 @@
+{% extends 'products/frontpage.html' %}
+{% load staticfiles %}
+
+{% block page_title %} What We Do {% endblock %}
+{% block get_list %}
+
+  {{ block.super }}
+
+ {% endblock %}
+
+ {% block activity %}
+
+  {{ block.super }}
+
+ {% endblock %}
+
+ {% block extra_css %}
+
+
+ <style>
+   
+ #main{
+   margin-top:30px;
+ }
+  
+
+ </style>
+
+
+ {% endblock %}
+
+ {% block content %}
+ <div class="row">
+     <h2 class="brown-text text-darken-2 center-align">HOW IT WORKS !!</h2> 
+     <div class="col s12 row card">
+                        <div class="col s4 " id='main'>
+                        <img height=80px src="{% static 'common/img/work5.gif' %}">
+                        </div>
+                        <div class="col s8 ">
+                            <h5 class="deep-orange-text text-darken-4">Log In First !!</h5>
+                        <p>
+                             <ul  class="brown-text text-darken-2">
+                               <li>
+                             Visit www.sugarush.com, and register yourself by creating an account.
+                               </li>  
+                               <li>
+                             Please provide valid email address and delivery address.
+                               </li> 
+                               <li>
+                             Visit your email id and click on the link send by us to update your account.
+                               </li>   
+                             </ul>    
+                        </p>
+                        </div>
+                    </div>
+                    
+                    <div class="col s12 row card">
+                        <div class="col s4" id='main'>
+                         <img height=80px src="{% static 'common/img/work2.png' %}">
+                        </div>
+                        <div class="col s8"> 
+                            <h5 class="deep-orange-text text-darken-4">Place Order !!</h5>
+                        <p>
+                            <ul  class="brown-text text-darken-2">
+                               <li>
+                             Select the products you want to buy.                                   
+                               </li>  
+                               <li>
+                             Add them to the Cart and procede to Cart.
+                               </li>
+                               <li>
+                             Select quantity of each item selected for cart and move to Checkout.
+                               </li>
+                             </ul>
+
+                        </p>
+                        </div> 
+                    </div>
+                    
+                    <div class="col s12 row card">
+                        <div class="col s4" id='main'>
+                        <img height=80px src="{% static 'common/img/work3.png' %}">
+                        </div>
+                        <div class="col s8">
+                            <h5 class="deep-orange-text text-darken-4">We will Deliver !!</h5>
+                          <ul class="brown-text text-darken-2">
+                               <li>
+                             Click on checkout and procede for payment.                                   
+                               </li>  
+                               <li>
+                             Chose neccessary payment options.
+                               </li>
+                               <li>
+                             Order will be delivered in next 45 minutes of order placement.
+                               </li>
+                             </ul>
+ 
+                        </div> 
+                    </div>
+                </div>
+
+         </div>
+     </div>
+ </div>
+ {% endblock %}
+
+
+
+

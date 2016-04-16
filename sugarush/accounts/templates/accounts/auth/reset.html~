@@ -1,0 +1,30 @@
+{% extends 'common/index.html' %}
+{% load staticfiles %}
+
+{% block page_title %} Reset Page {% endblock %}
+{% block get_list %}
+ 
+  {{ block.super }}
+
+ {% endblock %}
+
+ {% block activity %}
+
+  {{ block.super }}
+
+ {% endblock %}
+ {% block content %}
+ <div class="row">
+
+     <div class="col s12 m8 l6 offset-m2 offset-l3">
+         <div class="card-panel deep-orange darken-2">
+             <h4 class='brown-text text-darken-4'> Hey, {{ u }} we have send you a reset password mail.<br>Thank you </h4>
+
+
+         </div>
+     </div>
+ </div>
+ {% endblock %}
+
+
+
